@@ -23,54 +23,37 @@ def app():
     West Visayas State University"""
     st.text(text)
  
-    st.write('Logistic Regression:')
-    text = """Strengths: \nMore flexible: Can capture complex relationships between 
-    features and classes, even when they are non-linear. No strong independence assumption: 
-    Doesn't rely on the assumption that features are independent, which can be 
-    helpful for overlapping clusters."""
-    st.write(text)
-    text = """Weaknesses: \nOverfitting potential: Can overfit the training data when 
-    dealing with high dimensionality 
-    or small datasets."""
-    st.write(text)
-
-    st.write('Naive Bayes')
-    text = """Strengths: \nEfficient: Works well with high-dimensional datasets 
-    due to its simplicity. 
-    Fast training: Requires less training time compared to logistic regression. 
-    Interpretable: Easy to understand the contribution of each feature to the prediction."""
+    st.write('Decision Tree:')
+    text = """A very fast classfier but vulnerable to overfitting. May struggle with 
+    overlapping clusters due to rigid decision boundaries. Misclassification is 
+    likely at the cluster overlap regions.  Simple to interpret, efficient training."""
+    st.write(text
+             )
+    st.write('Random Forest')
+    text = """Generally handles overlapping clusters better than decision trees due 
+    to averaging predictions from multiple trees. Can still have issues with 
+    highly overlapped clusters. Ensemble method, improves robustness and reduces 
+    overfitting compared to single decision trees."""
     st.write(text)
 
-    text = """Weaknesses:\nIndependence assumption: Relies on the strong 
-    assumption of feature independence, which can be violated in overlapping clusters, 
-    leading to inaccurate predictions."""
-    st.write(text)
-
-    st.write('Support Vector Machine')
-    st.write("""Strong in complex, high-dimensional spaces, 
-             but computationally expensive.""")
-
-    st.write("""Strengths: Handles high dimensions, maximizes separation, efficient memory use, 
-              and offers some non-linearity through kernels. Weaknesses: Computationally 
-              demanding, can be difficult to interpret, and requires careful parameter tuning. 
-              SVMs are powerful for complex problems, but their efficiency and 
-              interpretability need consideration.""")
+    st.write('Extreme Random Forest')
+    st.write("""Often shows better performance on overlapping clusters than both 
+    decision trees and random forests. This is due to additional randomization in 
+    feature selection and splitting criteria. Builds on random forests by 
+    introducing additional randomness in feature selection and splitting criteria, 
+    potentially improving performance on complex data.""")
 
     # Create the selecton of classifier
-    clf = GaussianNB() 
-    options = ['Logistic Regression', 'Naive Bayes', 'Support Vector Machine']
-    selected_option = st.selectbox('Select the classifier', options)
-    if selected_option =='Logistic Regression':
-        clf = LogisticRegression(C=1.0, class_weight=None, 
-            dual=False, fit_intercept=True,
-            intercept_scaling=1, max_iter=100, multi_class='auto',
-            n_jobs=1, penalty='l2', random_state=42, solver='lbfgs',
-            tol=0.0001, verbose=0, warm_start=False)
-    elif selected_option=='Support Vector Machine':
-        clf = svm.SVC(kernel='linear', C=1000)
+    clf = tree.DecisionTreeClassifier()
+    options = ['Decision Tree', 'Random Forest Classifier', 'Extreme Random Forest Classifier']
+    selected_option = form2.selectbox('Select the classifier', options)
+    if selected_option =='Random Forest Classifier':
+        clf = RandomForestClassifier(n_jobs=2, random_state=0)
+    elif selected_option=='Extreme Random Forest Classifier':        
+        clf = ExtraTreesClassifier(n_estimators=100, max_depth=4, random_state=0)        
     else:
-        clf = GaussianNB()
-        
+        clf = tree.DecisionTreeClassifier()
+
     if st.button('Start'):
         
         df = pd.read_csv('data_decision_trees.csv', header=None)
