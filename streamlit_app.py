@@ -5,9 +5,8 @@ import streamlit as st
 import altair as alt
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.naive_bayes import GaussianNB
-from sklearn.linear_model import LogisticRegression
-from sklearn import svm
+from sklearn import tree
+from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier
 from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
@@ -15,8 +14,14 @@ from sklearn.metrics import classification_report
 # Define the Streamlit app
 def app():
     
-    st.title('Logistic Regression, Naive Bayes Classifiers and Support Vector Machine')
-    st.subheader('by Louie F. Cervantes M.Eng., WVSU College of ICT')
+    text = """Decision Tree, Random Forest and Extreme Random Forest on the Iris Dataset"""
+    st.subheader(text)
+    text = """Louie F. Cervantes, M. Eng. (Information Engineering) \n\n
+    CCS 229 - Intelligent Systems
+    Computer Science Department
+    College of Information and Communications Technology
+    West Visayas State University"""
+    st.text(text)
  
     st.write('Logistic Regression:')
     text = """Strengths: \nMore flexible: Can capture complex relationships between 
