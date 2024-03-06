@@ -53,7 +53,8 @@ def app():
     elif selected_option=='Extreme Random Forest Classifier':        
         clf = ExtraTreesClassifier(n_estimators=100, max_depth=4, random_state=0)
     elif selected_option == "K-Nearest Neighbor":
-        clf = KNeighborsClassifier(n_neighbors=5)
+        #clf = KNeighborsClassifier(n_neighbors=5)
+        clf = KNeighborsClassifier(n_neighbors=11, p=2, metric='euclidean')
     else:
         clf = tree.DecisionTreeClassifier()
 
