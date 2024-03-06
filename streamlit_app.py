@@ -44,6 +44,14 @@ def app():
     introducing additional randomness in feature selection and splitting criteria, 
     potentially improving performance on complex data.""")
 
+    st.write('K-Nearest Neighbor (KNN)')
+    st.write("""The K-Nearest Neighbors (KNN) algorithm is a popular technique in 
+    machine learning used for both classification and regression tasks. It works 
+    by assuming that data points close to each other are likely to have 
+    similar characteristics. For classification, the new data point is assigned 
+    the majority class of its k nearest neighbors.  For regression, the new data point's 
+    value is predicted based on the average value of its k nearest neighbors.""")
+
     # Create the selecton of classifier
     clf = tree.DecisionTreeClassifier()
     options = ['Decision Tree', 'Random Forest Classifier', 'Extreme Random Forest Classifier', 'K-Nearest Neighbor']
