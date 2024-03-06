@@ -46,7 +46,7 @@ def app():
 
     # Create the selecton of classifier
     clf = tree.DecisionTreeClassifier()
-    options = ['Decision Tree', 'Random Forest Classifier', 'Extreme Random Forest Classifier, K-Nearest Neighbor']
+    options = ['Decision Tree', 'Random Forest Classifier', 'Extreme Random Forest Classifier', 'K-Nearest Neighbor']
     selected_option = st.selectbox('Select the classifier', options)
     if selected_option =='Random Forest Classifier':
         clf = RandomForestClassifier(n_jobs=2, random_state=0)
