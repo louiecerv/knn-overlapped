@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn import tree
 from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
@@ -14,7 +15,7 @@ from sklearn.metrics import classification_report
 # Define the Streamlit app
 def app():
     
-    text = """Decision Tree, Random Forest and Extreme Random Forest on the Iris Dataset"""
+    text = """Decision Tree, Random Forest, Extreme Random Forest and K-Nearest Neighbor on Overlapped Clusters"""
     st.subheader(text)
     text = """Louie F. Cervantes, M. Eng. (Information Engineering) \n\n
     CCS 229 - Intelligent Systems
@@ -45,12 +46,14 @@ def app():
 
     # Create the selecton of classifier
     clf = tree.DecisionTreeClassifier()
-    options = ['Decision Tree', 'Random Forest Classifier', 'Extreme Random Forest Classifier']
+    options = ['Decision Tree', 'Random Forest Classifier', 'Extreme Random Forest Classifier, K-Nearest Neighbor']
     selected_option = st.selectbox('Select the classifier', options)
     if selected_option =='Random Forest Classifier':
         clf = RandomForestClassifier(n_jobs=2, random_state=0)
     elif selected_option=='Extreme Random Forest Classifier':        
-        clf = ExtraTreesClassifier(n_estimators=100, max_depth=4, random_state=0)        
+        clf = ExtraTreesClassifier(n_estimators=100, max_depth=4, random_state=0)
+    elif selected_option = "K-Nearest Neighbor":
+        clf = KNeighborsClassifier(n_neighbors=5)
     else:
         clf = tree.DecisionTreeClassifier()
 
